@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BuildDb>
+    <Tool>
+        <Name>linker</Name>
+        <Parent>
+            <Path>C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Exe\PY25Q64HA_STM32U375.stldr</Path>
+            <Output>
+                <Path>C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\List\PY25Q64HA_STM32U375.map</Path>
+            </Output>
+        </Parent>
+    </Tool>
+</BuildDb>

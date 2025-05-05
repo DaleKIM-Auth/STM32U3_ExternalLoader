@@ -1,0 +1,263 @@
+###############################################################################
+#
+# IAR ELF Linker V9.60.3.422/W64 for ARM                  30/Apr/2025  22:00:38
+# Copyright 2007-2024 IAR Systems AB.
+#
+#    Output file  =
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Exe\PY25Q64HA_STM32U375.stldr
+#    Map file     =
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\List\PY25Q64HA_STM32U375.map
+#    Command line =
+#        -f
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Exe\PY25Q64HA_STM32U375.stldr.rsp
+#        (C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Loader_5723430765115092510.dir\Dev_Inf.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Loader_5723430765115092510.dir\Loader_Src.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\py25q64ha.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_cortex.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_dma.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_dma_ex.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_exti.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_flash.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_flash_ex.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_gpio.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_gtzc.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_icache.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_pwr.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_pwr_ex.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_rcc.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_rcc_ex.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_tim.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_tim_ex.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_hal_xspi.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\stm32u3xx_ll_dlyb.o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir\system_stm32u3xx.o
+#        --no_out_extension -o
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Exe\PY25Q64HA_STM32U375.stldr
+#        --map
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\List\PY25Q64HA_STM32U375.map
+#        --config
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\Target.icf
+#        --semihosting --entry Init --vfe --text_out locale
+#        --cpu=Cortex-M33.no_dsp.no_se --fpu=None) --dependencies=n
+#        C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Exe\PY25Q64HA_STM32U375.stldr.iar_deps
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+__CPP_Runtime   = 1
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because --advanced_heap
+was not specified and the application did not appear to
+be primarily optimized for speed.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+define block RAM_BLOCK with fixed order { ro code, ro data, rw };
+"P1":  place in [from 0x2000'0004 to 0x2003'ffff] { block RAM_BLOCK };
+"P2":  place in [from 0x2000'0004 to 0x2003'ffff] { zi };
+define block Info_BLOCK with fixed order { ro data object Dev_Inf.o };
+"P3":  place in [from 0x0 to 0x100] { block Info_BLOCK };
+do not initialize { section .info, rw };
+
+  Section     Kind         Address  Alignment    Size  Object
+  -------     ----         -------  ---------    ----  ------
+"P3":                                            0xc8
+  Info_BLOCK                   0x0               0xc8  <Block>
+    .rodata   const            0x0          4    0xc8  Dev_Inf.o [2]
+                            - 0xc8               0xc8
+
+"P1-P2", part 1 of 2:                          0x2515
+  RAM_BLOCK            0x2000'0004             0x2515  <Block>
+    .text     ro code  0x2000'0004          4   0x47c  Loader_Src.o [2]
+    .text     ro code  0x2000'0480          4    0x66  ABImemset.o [3]
+    .text     ro code  0x2000'04e8          4     0x2  system_stm32u3xx.o [1]
+    .text     ro code  0x2000'04ec          4   0xa44  py25q64ha.o [1]
+    .text     ro code  0x2000'0f30          4   0x370  stm32u3xx_hal_rcc_ex.o [1]
+    .text     ro code  0x2000'12a0          4    0x80  stm32u3xx_hal_pwr_ex.o [1]
+    .text     ro code  0x2000'1320          4   0x698  stm32u3xx_hal_rcc.o [1]
+    .text     ro code  0x2000'19b8          4   0x7d0  stm32u3xx_hal_xspi.o [1]
+    .text     ro code  0x2000'2188          4   0x33c  stm32u3xx_hal_gpio.o [1]
+    .text     ro code  0x2000'24c4          4    0x14  stm32u3xx_hal_icache.o [1]
+    .text     ro code  0x2000'24d8          4    0x28  stm32u3xx_hal.o [1]
+    .rodata   const    0x2000'2500          4    0x10  system_stm32u3xx.o [1]
+    .data     rw data  0x2000'2510          4     0x4  stm32u3xx_hal.o [1]
+    .data     rw data  0x2000'2514          4     0x4  system_stm32u3xx.o [1]
+    .data     rw data  0x2000'2518                0x1  stm32u3xx_hal.o [1]
+                     - 0x2000'2519             0x2515
+
+"P1-P2", part 2 of 2:                            0x64
+  .bss                 0x2000'251c               0x64  <Block>
+    .bss      uninit   0x2000'251c          4    0x60  Loader_Src.o [2]
+    .bss      uninit   0x2000'257c          4     0x4  stm32u3xx_hal.o [1]
+                     - 0x2000'2580               0x64
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+         0xc8        0x100      0x39
+  0x2000'2519  0x2000'251b       0x3
+  0x2000'2580  0x2003'ffff  0x3'da80
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                  ro code  ro data  rw data
+    ------                  -------  -------  -------
+command line/config:
+    -------------------------------------------------
+    Total:
+
+C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir: [1]
+    py25q64ha.o               2'628
+    stm32u3xx_hal.o              40                 9
+    stm32u3xx_hal_gpio.o        828
+    stm32u3xx_hal_icache.o       20
+    stm32u3xx_hal_pwr_ex.o      128
+    stm32u3xx_hal_rcc.o       1'688
+    stm32u3xx_hal_rcc_ex.o      880
+    stm32u3xx_hal_xspi.o      2'000
+    system_stm32u3xx.o            2       16        4
+    -------------------------------------------------
+    Total:                    8'214       16       13
+
+C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Loader_5723430765115092510.dir: [2]
+    Dev_Inf.o                            200
+    Loader_Src.o              1'148                96
+    -------------------------------------------------
+    Total:                    1'148      200       96
+
+rt7M_tl.a: [3]
+    ABImemset.o                 102
+    -------------------------------------------------
+    Total:                      102
+
+    Gaps                          4
+-----------------------------------------------------
+    Grand Total:              9'468      216      109
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address   Size  Type      Object
+-----                       -------   ----  ----      ------
+.bss$$Base              0x2000'251c          --   Gb  - Linker created -
+.bss$$Length                   0x64          --   Gb  - Linker created -
+.bss$$Limit             0x2000'2580          --   Gb  - Linker created -
+AHBPrescTable           0x2000'2500   0x10  Data  Gb  system_stm32u3xx.o [1]
+CheckSum                0x2000'0125    0x4  Code  Gb  Loader_Src.o [2]
+HAL_Delay               0x2000'24d9   0x28  Code  Wk  stm32u3xx_hal.o [1]
+HAL_GPIO_DeInit         0x2000'234b  0x148  Code  Gb  stm32u3xx_hal_gpio.o [1]
+HAL_GPIO_Init           0x2000'2189  0x1c2  Code  Gb  stm32u3xx_hal_gpio.o [1]
+HAL_GetTick             0x2000'002f   0x22  Code  Gb  Loader_Src.o [2]
+HAL_ICACHE_Enable       0x2000'24c5    0xe  Code  Gb  stm32u3xx_hal_icache.o [1]
+HAL_InitTick            0x2000'0005   0x2a  Code  Gb  Loader_Src.o [2]
+HAL_PWREx_ControlVoltageScaling
+                        0x2000'12a1   0x40  Code  Gb  stm32u3xx_hal_pwr_ex.o [1]
+HAL_PWREx_EnableEpodBooster
+                        0x2000'12e1   0x32  Code  Gb  stm32u3xx_hal_pwr_ex.o [1]
+HAL_RCCEx_EpodBoosterClkConfig
+                        0x2000'1237   0x46  Code  Gb  stm32u3xx_hal_rcc_ex.o [1]
+HAL_RCCEx_PeriphCLKConfig
+                        0x2000'0f31  0x306  Code  Gb  stm32u3xx_hal_rcc_ex.o [1]
+HAL_RCC_ClockConfig     0x2000'1805  0x130  Code  Gb  stm32u3xx_hal_rcc.o [1]
+HAL_RCC_GetSysClockFreq
+                        0x2000'1935   0x3e  Code  Gb  stm32u3xx_hal_rcc.o [1]
+HAL_RCC_OscConfig       0x2000'1321  0x4e4  Code  Gb  stm32u3xx_hal_rcc.o [1]
+HAL_XSPI_AutoPolling    0x2000'1da7   0xd0  Code  Gb  stm32u3xx_hal_xspi.o [1]
+HAL_XSPI_Command        0x2000'1b3d   0xe4  Code  Gb  stm32u3xx_hal_xspi.o [1]
+HAL_XSPI_DeInit         0x2000'1aff   0x36  Code  Gb  stm32u3xx_hal_xspi.o [1]
+HAL_XSPI_Init           0x2000'19b9  0x146  Code  Gb  stm32u3xx_hal_xspi.o [1]
+HAL_XSPI_MemoryMapped   0x2000'1e77   0x6e  Code  Gb  stm32u3xx_hal_xspi.o [1]
+HAL_XSPI_MspDeInit      0x2000'03fd   0x2a  Code  Gb  Loader_Src.o [2]
+HAL_XSPI_MspInit        0x2000'0303   0xfa  Code  Gb  Loader_Src.o [2]
+HAL_XSPI_Receive        0x2000'1ccb   0xdc  Code  Gb  stm32u3xx_hal_xspi.o [1]
+HAL_XSPI_SetTimeout     0x2000'1ee7    0x6  Code  Gb  stm32u3xx_hal_xspi.o [1]
+HAL_XSPI_Transmit       0x2000'1c21   0xaa  Code  Gb  stm32u3xx_hal_xspi.o [1]
+Info_BLOCK$$Base                0x0          --   Gb  - Linker created -
+Info_BLOCK$$Limit              0xc8          --   Gb  - Linker created -
+Init                    0x2000'0051   0x56  Code  Gb  Loader_Src.o [2]
+MX_ICACHE_Init          0x2000'0479    0x8  Code  Lc  Loader_Src.o [2]
+MX_OCTOSPI1_DeInit      0x2000'02cf   0x34  Code  Lc  Loader_Src.o [2]
+MX_OCTOSPI1_Init        0x2000'027b   0x54  Code  Lc  Loader_Src.o [2]
+MassErase               0x2000'00d7   0x1a  Code  Gb  Loader_Src.o [2]
+PY25Q63_IsBusy          0x2000'0ed7   0x30  Code  Gb  py25q64ha.o [1]
+PY25Q63_QPI_IsBusy      0x2000'0a45   0x30  Code  Gb  py25q64ha.o [1]
+PY25Q64_AutoPollingMemReady
+                        0x2000'0ca1   0x84  Code  Gb  py25q64ha.o [1]
+PY25Q64_Delay           0x2000'0f07   0x1c  Code  Lc  py25q64ha.o [1]
+PY25Q64_Init            0x2000'04ed   0x4e  Code  Gb  py25q64ha.o [1]
+PY25Q64_MassErase       0x2000'0d25   0x96  Code  Gb  py25q64ha.o [1]
+PY25Q64_MemoryMappedMode
+                        0x2000'0a75   0xec  Code  Gb  py25q64ha.o [1]
+PY25Q64_QPIDisable      0x2000'09fb   0x4a  Code  Gb  py25q64ha.o [1]
+PY25Q64_QPIEnable       0x2000'09b1   0x4a  Code  Gb  py25q64ha.o [1]
+PY25Q64_QPIInitConfiguration
+                        0x2000'053b   0x50  Code  Gb  py25q64ha.o [1]
+PY25Q64_QPI_BlockErase  0x2000'065d   0x86  Code  Gb  py25q64ha.o [1]
+PY25Q64_QPI_Program     0x2000'058b   0xd2  Code  Gb  py25q64ha.o [1]
+PY25Q64_QPI_ReadStatus0Register
+                        0x2000'0797   0x68  Code  Gb  py25q64ha.o [1]
+PY25Q64_QPI_WriteEnable
+                        0x2000'06e3   0xb4  Code  Gb  py25q64ha.o [1]
+PY25Q64_QuadModeEnable  0x2000'0967   0x4a  Code  Gb  py25q64ha.o [1]
+PY25Q64_ReadID          0x2000'0e55   0x82  Code  Gb  py25q64ha.o [1]
+PY25Q64_ReadStatus0Register
+                        0x2000'0b61   0x66  Code  Gb  py25q64ha.o [1]
+PY25Q64_ReadStatus1Register
+                        0x2000'0bc7   0x68  Code  Gb  py25q64ha.o [1]
+PY25Q64_ResetMemory     0x2000'0dc1   0x94  Code  Gb  py25q64ha.o [1]
+PY25Q64_WriteDisable    0x2000'08b3   0xb4  Code  Gb  py25q64ha.o [1]
+PY25Q64_WriteEnable     0x2000'07ff   0xb4  Code  Gb  py25q64ha.o [1]
+PY25Q64_WriteStatus1Register
+                        0x2000'0c2f   0x72  Code  Gb  py25q64ha.o [1]
+RAM_BLOCK$$Base         0x2000'0004          --   Gb  - Linker created -
+RAM_BLOCK$$Limit        0x2000'2519          --   Gb  - Linker created -
+SectorErase             0x2000'00f1   0x34  Code  Gb  Loader_Src.o [2]
+StorageInfo                     0x0   0xc8  Data  Gb  Dev_Inf.o [2]
+SystemClockInit         0x2000'017d   0xfe  Code  Gb  Loader_Src.o [2]
+SystemCoreClock         0x2000'2514    0x4  Data  Gb  system_stm32u3xx.o [1]
+SystemInit              0x2000'04e9    0x2  Code  Gb  system_stm32u3xx.o [1]
+Verify                  0x2000'0129   0x54  Code  Gb  Loader_Src.o [2]
+Write                   0x2000'00a7   0x30  Code  Gb  Loader_Src.o [2]
+XSPI_ConfigCmd          0x2000'1f3d  0x236  Code  Lc  stm32u3xx_hal_xspi.o [1]
+XSPI_WaitFlagStateUntilTimeout
+                        0x2000'1eed   0x50  Code  Lc  stm32u3xx_hal_xspi.o [1]
+__aeabi_memset          0x2000'0481         Code  Gb  ABImemset.o [3]
+__iar_Memset            0x2000'0481         Code  Gb  ABImemset.o [3]
+__iar_Memset_word       0x2000'0489         Code  Gb  ABImemset.o [3]
+hxspi1                  0x2000'251c   0x60  Data  Gb  Loader_Src.o [2]
+uwTick                  0x2000'257c    0x4  Data  Gb  stm32u3xx_hal.o [1]
+uwTickFreq              0x2000'2518    0x1  Data  Gb  stm32u3xx_hal.o [1]
+uwTickPrio              0x2000'2510    0x4  Data  Gb  stm32u3xx_hal.o [1]
+
+
+[1] = C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Library_12270351780628986503.dir
+[2] = C:\WorkSpace\ExternalLoader_STM32U3_PY25Q64HA\Project\PY25Q64HA_STM32U375\Obj\Loader_5723430765115092510.dir
+[3] = rt7M_tl.a
+
+  9'468 bytes of readonly  code memory
+    216 bytes of readonly  data memory
+    109 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
