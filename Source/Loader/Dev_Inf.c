@@ -27,14 +27,14 @@ __root struct StorageInfo const StorageInfo  =  {
 #else
 struct StorageInfo const StorageInfo  =  {
 #endif
-   "PY25Q64HA_ExternalLoader",                                         // Device Name 
+   "PY25Q64HA_ExternalLoader",                       // Device Name 
    NOR_FLASH,                   					        // Device Type
-   0x90000000,                						        // Device Start Address
-   0x800000,                                                                    // Device Size in 8 MBytes
+   0x90000000,                						     // Device Start Address
+   0x800000,                                         // Device Size in 8 MBytes
    0x100,                    						        // Programming  Size 256Bytes
-   0xFF,                       						        // Initial Content of Erased Memory
+   0xFF,                       						     // Initial Content of Erased Memory
 // Specify Size and Address of Sectors (view example below)
-   0x00000080, 0x00010000,     				 		        // block Num : 128 ,block Size: 64 KBytes
+   0x00000080, 0x00010000,     				 		     // block Num : 128 ,block Size: 64 KBytes
    0x00000000, 0x00000000,      
 }; 
 
