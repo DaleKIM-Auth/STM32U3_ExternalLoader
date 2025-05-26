@@ -4,7 +4,9 @@ extern XSPI_HandleTypeDef hxspi1;
 
 PY25Q64_STATE PY25Q64_Init(void)
 {
-  uint8_t qe = 0;
+  uint8_t sr0 = 0;
+  uint8_t sr1 = 0;  
+  uint8_t rcr[2] = { 0x0 };
  
   if (PY25Q64_QPIDisable() != PY25Q64_OK){
     return PY25Q64_CHIP_ERR;
@@ -28,12 +30,12 @@ PY25Q64_STATE PY25Q64_Init(void)
   }
 
   /* Quad mode enable */
-  PY25Q64_ReadStatus1Register(&qe);
+  PY25Q64_ReadStatus1Register(&sr1);
   
-  if((qe&PY25Q_QE_MASK) != PY25Q_QE_MASK){
+  if((sr1&PY25Q_QE_MASK) != PY25Q_QE_MASK){
     PY25Q64_QuadModeEnable();
   }
- 
+  
   return PY25Q64_OK;
 }
 
@@ -693,8 +695,7 @@ PY25Q64_STATE PY25Q64_Program(uint8_t* pData, uint32_t len, uint32_t rawAddr)
   XSPI_RegularCmdTypeDef sCommands = { 0 };
   uint32_t endAddr = 0U;
   uint32_t curAddr = 0U;
-  uint32_t curSize = 0U;  
-
+  uint32_t curSize = 0U;    
   /* Calculation of the size between the write address and the end of the page */
   curSize = MEM_PAGE_SIZE - (rawAddr % MEM_PAGE_SIZE);
 
@@ -716,22 +717,19 @@ PY25Q64_STATE PY25Q64_Program(uint8_t* pData, uint32_t len, uint32_t rawAddr)
   sCommands.DummyCycles = 0U;
   sCommands.DataMode = HAL_XSPI_DATA_4_LINES;
   sCommands.DQSMode = HAL_XSPI_DQS_DISABLE;
-
+  
   do{
 
    sCommands.Address = curAddr;
    sCommands.DataLength = curSize;  
-    
-    while(PY25Q63_IsBusy() == PY25Q64_BUSY){
-    }
-
-    PY25Q64_WriteEnable();
+   
+   PY25Q64_WriteEnable();
 
     if (HAL_XSPI_Command(&hxspi1, &sCommands, HAL_XSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK){
       return PY25Q64_SPI_ERR;
     }
-
-    if (HAL_XSPI_Transmit(&hxspi1, pData, HAL_XSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK){
+  
+    if (HAL_XSPI_Transmit(&hxspi1, pData, HAL_XSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK){      
       return PY25Q64_SPI_ERR;
     }
 
@@ -984,6 +982,52 @@ PY25Q64_STATE PY25Q64_WriteStatus1Register(uint8_t* reg)
   }
   
   return PY25Q64_OK;
+}
+
+PY25Q64_STATE PY25Q64_ReadConfigureRegister(uint8_t *reg)
+{
+  XSPI_RegularCmdTypeDef sCommands = { 0 };
+  
+  sCommands.OperationType = HAL_XSPI_OPTYPE_COMMON_CFG;
+  sCommands.InstructionMode = HAL_XSPI_INSTRUCTION_1_LINE;
+  sCommands.Instruction = PY25Q_RDCR;
+  sCommands.AddressMode = HAL_XSPI_ADDRESS_NONE;
+  sCommands.AlternateBytesMode = HAL_XSPI_ALT_BYTES_NONE;
+  sCommands.DummyCycles = 0U;
+  sCommands.DataMode = HAL_XSPI_DATA_1_LINE;
+  sCommands.DataLength = 2U;
+  sCommands.DQSMode = HAL_XSPI_DQS_DISABLE;
+
+  if (HAL_XSPI_Command(&hxspi1, &sCommands, HAL_XSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK){
+    return PY25Q64_SPI_ERR;
+  }
+
+  if (HAL_XSPI_Receive(&hxspi1, reg, HAL_XSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK){
+    return PY25Q64_SPI_ERR;
+  }
+  
+  return PY25Q64_OK;
+}
+
+PY25Q64_STATE PY25Q64_GlobalBlockUnlock(void)
+{
+  XSPI_RegularCmdTypeDef sCommands = { 0 };
+
+  sCommands.OperationType = HAL_XSPI_OPTYPE_COMMON_CFG;
+  sCommands.InstructionMode = HAL_XSPI_INSTRUCTION_1_LINE;
+  sCommands.Instruction = PY25Q_GBULK;
+  sCommands.AddressMode = HAL_XSPI_ADDRESS_NONE;
+  sCommands.AlternateBytesMode = HAL_XSPI_ALT_BYTES_NONE;
+  sCommands.DummyCycles = 0U;
+  sCommands.DataMode = HAL_XSPI_DATA_NONE;
+  sCommands.DQSMode = HAL_XSPI_DQS_DISABLE;
+
+  if (HAL_XSPI_Command(&hxspi1, &sCommands, HAL_XSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK){
+    return PY25Q64_SPI_ERR;
+  }
+  
+  return PY25Q64_OK;
+
 }
 
 uint8_t PY25Q64_ReadID(void)

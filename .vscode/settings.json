@@ -1,5 +1,6 @@
 {
   "files.associations": {
-    "py25q64ha.h": "c"
+    "py25q64ha.h": "c",
+    "stm32u3xx_hal.h": "c"
   }
 }

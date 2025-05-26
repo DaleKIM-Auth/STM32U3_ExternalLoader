@@ -35,6 +35,120 @@ static void MX_OCTOSPI1_DeInit(void);
 static void MX_ICACHE_Init(void);
 
 /* USER CODE END PFP */
+/**
+  * @brief UART MSP Initialization
+  * This function configures the hardware resources used in this example
+  * @param huart: UART handle pointer
+  * @retval None
+  */
+void HAL_UART_MspInit(UART_HandleTypeDef* huart)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+  if(huart->Instance==USART1)
+  {
+    /* USER CODE BEGIN USART1_MspInit 0 */
+
+    /* USER CODE END USART1_MspInit 0 */
+
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1;
+    PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+
+    }
+
+    /* Peripheral clock enable */
+    __HAL_RCC_USART1_CLK_ENABLE();
+
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    /**USART1 GPIO Configuration
+    PB7     ------> USART1_RX
+    PB6     ------> USART1_TX
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_7|GPIO_PIN_6;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+    /* USER CODE BEGIN USART1_MspInit 1 */
+
+    /* USER CODE END USART1_MspInit 1 */
+
+  }
+
+}
+
+/**
+  * @brief UART MSP De-Initialization
+  * This function freeze the hardware resources used in this example
+  * @param huart: UART handle pointer
+  * @retval None
+  */
+void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
+{
+  if(huart->Instance==USART1)
+  {
+    /* USER CODE BEGIN USART1_MspDeInit 0 */
+
+    /* USER CODE END USART1_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_USART1_CLK_DISABLE();
+
+    /**USART1 GPIO Configuration
+    PB7     ------> USART1_RX
+    PB6     ------> USART1_TX
+    */
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_7|GPIO_PIN_6);
+
+    /* USER CODE BEGIN USART1_MspDeInit 1 */
+
+    /* USER CODE END USART1_MspDeInit 1 */
+  }
+
+}
+
+
+/**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart1.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+
+  }
+
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
+}
 
 KeepInCompilation HAL_StatusTypeDef HAL_InitTick(uint32_t HAL_InitTick)
 { 
@@ -87,7 +201,8 @@ int Init()
   
   /* Initialize peripherals */
   MX_ICACHE_Init();
-  
+  MX_USART1_UART_Init();
+
   /* QuadSPI De-Init */
   MX_OCTOSPI1_DeInit();
 
@@ -98,8 +213,8 @@ int Init()
       return 0;
   }
 
-  PY25Q64_AutoPollingMemReady();
-  
+  PY25Q64_AutoPollingMemReady();  
+
   /* Set Memory Mapped Mode */
   result = PY25Q64_MemoryMappedMode();
 
@@ -122,8 +237,9 @@ int Init()
  */
 KeepInCompilation int Write (uint32_t Address, uint32_t Size, uint8_t* buffer)
 {
-  __disable_irq();
 
+  __disable_irq();
+   
   /* QuadSPI De-Init */
   MX_OCTOSPI1_DeInit();
 
@@ -134,6 +250,8 @@ KeepInCompilation int Write (uint32_t Address, uint32_t Size, uint8_t* buffer)
   
   PY25Q64_AutoPollingMemReady();
 
+  Address = Address | 0x400000;
+   
   /* Writes an amount of data to the QSPI memory */
   if(PY25Q64_Program(buffer, Size, Address) != PY25Q64_OK){
     return 0;
@@ -153,7 +271,7 @@ KeepInCompilation int Write (uint32_t Address, uint32_t Size, uint8_t* buffer)
 KeepInCompilation int MassErase (uint32_t Parallelism )
 { 
   __disable_irq();
-
+  
   /* QuadSPI De-Init */
   MX_OCTOSPI1_DeInit();
 
@@ -186,7 +304,7 @@ KeepInCompilation int SectorErase (uint32_t EraseStartAddress ,uint32_t EraseEnd
   EraseStartAddress &= 0x0FFFFFFF;
   EraseEndAddress &= 0x0FFFFFFF;
   EraseStartAddress = EraseStartAddress - EraseStartAddress % 0x10000;
-  
+
   /* QuadSPI De-Init */
   MX_OCTOSPI1_DeInit();
 
@@ -222,8 +340,6 @@ KeepInCompilation int SectorErase (uint32_t EraseStartAddress ,uint32_t EraseEnd
  */
 uint32_t CheckSum(uint32_t StartAddress, uint32_t Size, uint32_t InitVal)
 {
-  return 1;
-  
   __disable_irq();
 
   uint8_t missalignementAddress = StartAddress%4;
@@ -313,7 +429,7 @@ uint32_t CheckSum(uint32_t StartAddress, uint32_t Size, uint32_t InitVal)
 KeepInCompilation uint64_t Verify (uint32_t MemoryAddr, uint32_t RAMBufferAddr, uint32_t Size, uint32_t missalignement)
 {  
   __disable_irq();
-
+  
   uint32_t VerifiedData = 0, InitVal = 0;
   uint64_t checksum = 0;
   Size*=4;
@@ -457,10 +573,10 @@ static void MX_GPIO_Init(void)
    /* USER CODE END OCTOSPI1_Init 1 */
    /* OCTOSPI1 parameter configuration*/
   hxspi1.Instance = OCTOSPI1;
-  hxspi1.Init.FifoThresholdByte = 1;
+  hxspi1.Init.FifoThresholdByte = 4;
   hxspi1.Init.MemoryMode = HAL_XSPI_SINGLE_MEM;
   hxspi1.Init.MemoryType = HAL_XSPI_MEMTYPE_MICRON;
-  hxspi1.Init.MemorySize = HAL_XSPI_SIZE_8MB;
+  hxspi1.Init.MemorySize = HAL_XSPI_SIZE_64MB;
   hxspi1.Init.ChipSelectHighTimeCycle = 1;
   hxspi1.Init.FreeRunningClock = HAL_XSPI_FREERUNCLK_DISABLE;
   hxspi1.Init.ClockMode = HAL_XSPI_CLOCK_MODE_0;

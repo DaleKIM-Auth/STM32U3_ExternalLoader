@@ -194,6 +194,8 @@ PY25Q64_STATE PY25Q64_AutoPollingMemReady(void);
 PY25Q64_STATE PY25Q64_ResetMemory(void);
 PY25Q64_STATE PY25Q64_ReadStatus0Register(uint8_t *reg);
 PY25Q64_STATE PY25Q64_ReadStatus1Register(uint8_t *reg);
+PY25Q64_STATE PY25Q64_ReadConfigureRegister(uint8_t *reg);
+PY25Q64_STATE PY25Q64_GlobalBlockUnlock(void);
 PY25Q64_STATE PY25Q63_IsBusy(void);
 uint8_t PY25Q64_ReadID(void);
 void PY25Q64_Delay(uint32_t ms);

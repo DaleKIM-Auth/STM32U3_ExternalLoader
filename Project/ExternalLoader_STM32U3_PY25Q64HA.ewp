@@ -2266,6 +2266,12 @@
             <name>$PROJ_DIR$\..\Source\Library\stm32u3xx_hal_tim_ex.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\Source\Library\stm32u3xx_hal_uart.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\Library\stm32u3xx_hal_uart_ex.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\Source\Library\stm32u3xx_hal_xspi.c</name>
         </file>
         <file>
