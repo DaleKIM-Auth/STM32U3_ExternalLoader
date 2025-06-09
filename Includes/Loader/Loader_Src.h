@@ -26,17 +26,19 @@
 #include "stm32u3xx_hal.h"
 #include "stm32u3xx_hal_xspi.h"
 #include "py25q64ha.h"
+#include <string.h>
+#include <stdio.h>
 
 #define TIMEOUT 5000U
 #define KeepInCompilation __root
 
 /* Private function prototypes -----------------------------------------------*/
-int Init ();
+int Init (void);
+KeepInCompilation int MassErase (uint32_t Parallelism );
 KeepInCompilation int Write (uint32_t Address, uint32_t Size, uint8_t* buffer);
 KeepInCompilation int SectorErase (uint32_t EraseStartAddress ,uint32_t EraseEndAddress);
 KeepInCompilation uint64_t Verify (uint32_t MemoryAddr, uint32_t RAMBufferAddr, uint32_t Size, uint32_t missalignement);
 KeepInCompilation HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority);
-KeepInCompilation int MassErase (uint32_t Parallelism );
 int SystemClockInit(void);
 void HAL_MspInit(void);
 

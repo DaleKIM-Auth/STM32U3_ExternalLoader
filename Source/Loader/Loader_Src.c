@@ -20,16 +20,15 @@
 */
 
 #include "Loader_Src.h"
-#include <string.h>
 
 #pragma section=".bss"
 
 /* Private variables ---------------------------------------------------------*/
 XSPI_HandleTypeDef hxspi1;
+UART_HandleTypeDef huart1;
 
 /* Private functions ---------------------------------------------------------*/
 void HAL_XSPI_MspDeInit(XSPI_HandleTypeDef* hxspi);
-static void MX_GPIO_Init(void);
 static int MX_OCTOSPI1_Init(void);
 static void MX_OCTOSPI1_DeInit(void);
 static void MX_ICACHE_Init(void);
@@ -178,7 +177,7 @@ KeepInCompilation uint32_t HAL_GetTick(void)
  * @retval  1      : Operation succeeded
  * @retval  0      : Operation failed
  */
-int Init()
+int Init(void)
 {
   int32_t result=0;
 
@@ -221,7 +220,7 @@ int Init()
   if(result != PY25Q64_OK){
     return 0;
   }
-  
+
   __enable_irq();
   
   return 1;
@@ -237,9 +236,8 @@ int Init()
  */
 KeepInCompilation int Write (uint32_t Address, uint32_t Size, uint8_t* buffer)
 {
-
   __disable_irq();
-   
+  
   /* QuadSPI De-Init */
   MX_OCTOSPI1_DeInit();
 
@@ -248,10 +246,6 @@ KeepInCompilation int Write (uint32_t Address, uint32_t Size, uint8_t* buffer)
 
   Address = Address & 0x0FFFFFFF;
   
-  PY25Q64_AutoPollingMemReady();
-
-  Address = Address | 0x400000;
-   
   /* Writes an amount of data to the QSPI memory */
   if(PY25Q64_Program(buffer, Size, Address) != PY25Q64_OK){
     return 0;
@@ -271,7 +265,7 @@ KeepInCompilation int Write (uint32_t Address, uint32_t Size, uint8_t* buffer)
 KeepInCompilation int MassErase (uint32_t Parallelism )
 { 
   __disable_irq();
-  
+
   /* QuadSPI De-Init */
   MX_OCTOSPI1_DeInit();
 
@@ -284,7 +278,7 @@ KeepInCompilation int MassErase (uint32_t Parallelism )
   if (PY25Q64_MassErase() != PY25Q64_OK){
       return 0;
   }
-
+  
   __enable_irq();
 
    return 1;
@@ -312,7 +306,7 @@ KeepInCompilation int SectorErase (uint32_t EraseStartAddress ,uint32_t EraseEnd
   MX_OCTOSPI1_Init();
 
   while(EraseEndAddress >= EraseStartAddress){
-    BlockAddr = EraseStartAddress;
+    BlockAddr = EraseStartAddress / (MEM_BLOCK_SIZE * 1024U) ;
 
     /* Erases the specified block of the QSPI memory */
     PY25Q64_BlockErase(BlockAddr);
@@ -320,7 +314,7 @@ KeepInCompilation int SectorErase (uint32_t EraseStartAddress ,uint32_t EraseEnd
     /* Reads current status of the QSPI memory */
     EraseStartAddress += 0x10000;
   }
-  
+
   __enable_irq();
 
   return 1;	
@@ -536,27 +530,6 @@ int SystemClockInit(void)
 }
 
 /**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_GPIO_Init(void)
-{
-  /* USER CODE BEGIN MX_GPIO_Init_1 */
-
-  /* USER CODE END MX_GPIO_Init_1 */
-
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-
-  /* USER CODE BEGIN MX_GPIO_Init_2 */
-
-  /* USER CODE END MX_GPIO_Init_2 */
-}
-
-/**
   * @brief OCTOSPI1 Initialization Function
   * @param None
   * @retval None
@@ -573,7 +546,7 @@ static void MX_GPIO_Init(void)
    /* USER CODE END OCTOSPI1_Init 1 */
    /* OCTOSPI1 parameter configuration*/
   hxspi1.Instance = OCTOSPI1;
-  hxspi1.Init.FifoThresholdByte = 4;
+  hxspi1.Init.FifoThresholdByte = 1;
   hxspi1.Init.MemoryMode = HAL_XSPI_SINGLE_MEM;
   hxspi1.Init.MemoryType = HAL_XSPI_MEMTYPE_MICRON;
   hxspi1.Init.MemorySize = HAL_XSPI_SIZE_64MB;
@@ -581,7 +554,7 @@ static void MX_GPIO_Init(void)
   hxspi1.Init.FreeRunningClock = HAL_XSPI_FREERUNCLK_DISABLE;
   hxspi1.Init.ClockMode = HAL_XSPI_CLOCK_MODE_0;
   hxspi1.Init.WrapSize = HAL_XSPI_WRAP_NOT_SUPPORTED;
-  hxspi1.Init.ClockPrescaler = 1;
+  hxspi1.Init.ClockPrescaler = 6;
   hxspi1.Init.SampleShifting = HAL_XSPI_SAMPLE_SHIFT_NONE;
   hxspi1.Init.DelayHoldQuarterCycle = HAL_XSPI_DHQC_DISABLE;
   hxspi1.Init.ChipSelectBoundary = HAL_XSPI_BONDARYOF_NONE;

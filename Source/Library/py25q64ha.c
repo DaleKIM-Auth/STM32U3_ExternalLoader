@@ -1,12 +1,49 @@
 #include "py25q64ha.h"
 
 extern XSPI_HandleTypeDef hxspi1;
+extern UART_HandleTypeDef huart1;
+
+#if defined(__ICCARM__)
+__ATTRIBUTES size_t __write(int, const unsigned char *, size_t);
+#endif /* __ICCARM__ */
+
+#if defined(__ICCARM__)
+/* New definition from EWARM V9, compatible with EWARM8 */
+int iar_fputc(int ch);
+#define PUTCHAR_PROTOTYPE int iar_fputc(int ch)
+#elif defined ( __CC_ARM ) || defined(__ARMCC_VERSION)
+/* ARM Compiler 5/6*/
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#elif defined(__GNUC__)
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#endif /* __ICCARM__ */
+#if defined(__ICCARM__)
+size_t __write(int file, unsigned char const *ptr, size_t len)
+{
+  size_t idx;
+  unsigned char const *pdata = ptr;
+
+  for (idx = 0; idx < len; idx++)
+  {
+    iar_fputc((int)*pdata);
+    pdata++;
+  }
+  return len;
+}
+#endif /* __ICCARM__ */
+
+/**
+ * @brief  Retargets the C library printf function to the USART.
+ */
+PUTCHAR_PROTOTYPE
+{  
+    HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+    return ch;
+}
 
 PY25Q64_STATE PY25Q64_Init(void)
 {
-  uint8_t sr0 = 0;
   uint8_t sr1 = 0;  
-  uint8_t rcr[2] = { 0x0 };
  
   if (PY25Q64_QPIDisable() != PY25Q64_OK){
     return PY25Q64_CHIP_ERR;
@@ -255,7 +292,7 @@ PY25Q64_STATE PY25Q64_QPI_BlockErase(uint32_t BlockAddr)
     return PY25Q64_CHIP_ERR;
   }
 
-  if(BlockAddr >= MEM_BLOCK_COUNT){
+  if(BlockAddr > MEM_BLOCK_COUNT){
     return PY25Q64_PARAM_ERROR;
   }
 
@@ -810,12 +847,8 @@ PY25Q64_STATE PY25Q64_BlockErase(uint32_t BlockAddr)
   XSPI_RegularCmdTypeDef sCommands = { 0 };
   uint32_t RawAddr = 0;
 
-
-  if(BlockAddr >= MEM_BLOCK_COUNT){
+  if(BlockAddr > MEM_BLOCK_COUNT){
     return PY25Q64_PARAM_ERROR;
-  }
-    
-  while(PY25Q63_IsBusy() == PY25Q64_BUSY){
   }
 
   RawAddr = BlockAddr * MEM_BLOCK_SIZE * 1024U;

@@ -2,7 +2,7 @@
 #define __PY25Q64HA_DRIVER__
 
 #include "stm32u3xx_hal.h"
-
+#include <stdio.h>
 /*
  * **********************
  * PY25Q64HA Commands List

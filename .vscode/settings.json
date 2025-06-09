@@ -1,6 +1,8 @@
 {
   "files.associations": {
     "py25q64ha.h": "c",
-    "stm32u3xx_hal.h": "c"
+    "stm32u3xx_hal.h": "c",
+    "string.h": "c",
+    "loader_src.h": "c"
   }
 }
